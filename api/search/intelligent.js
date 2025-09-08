@@ -1,5 +1,5 @@
 // api/search/intelligent.js
-import { withCors, checkApiKey, getDrive } from "../_util";
+import { withCors, checkApiKey, getDrive } from '../_util.js';
 
 /** Utilidades */
 const uniqById = arr => Object.values(
