@@ -14,7 +14,12 @@ export function withCors(res) {
 
 export function checkApiKey(req, res) {
   const key = req.headers["x-api-key"];
-  if (!key || key !== process.env.API_KEY) {
+
+  // 🔍 Debug nos logs da Vercel
+  console.log("🔑 Recebido:", key, "| Esperado:", process.env.API_KEY);
+
+  // Checagem tolerante (remove espaços/quebras de linha)
+  if (!key || key.trim() !== (process.env.API_KEY || "").trim()) {
     res.status(401).json({ error: "Unauthorized" });
     return false;
   }
