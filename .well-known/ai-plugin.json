@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Drive Proxy",
+  "name_for_model": "drive_proxy",
+  "description_for_human": "Busca e lê arquivos do Google Drive via Service Account.",
+  "description_for_model": "Use esta API para procurar arquivos no Google Drive e exportá-los ou baixá-los diretamente. Sempre envie o header x-api-key.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://drive-proxy-juo9.vercel.app/openapi.yaml"
+  },
+  "logo_url": "https://vercel.com/favicon.ico",
+  "contact_email": "seu-email@dominio.com",
+  "legal_info_url": "https://seuprojeto.com/terms"
+}
