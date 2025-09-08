@@ -1,6 +1,7 @@
 import { getDrive, checkApiKey, withCors } from "../_util.js";
 
-export const config = { runtime: "nodejs20.x" };
+// Se quiser, pode até remover isso e deixar sem config
+export const config = { runtime: "nodejs" };
 
 export default async function handler(req, res) {
   withCors(res);
