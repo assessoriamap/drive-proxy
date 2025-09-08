@@ -1,4 +1,4 @@
-import { getDrive, checkApiKey, withCors, config } from "./_util";
+import { getDrive, checkApiKey, withCors, config } from "./_util.js";
 
 export { config };
 
