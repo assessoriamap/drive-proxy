@@ -2,16 +2,19 @@ openapi: 3.0.1
 info:
   title: Drive Proxy API
   version: "1.0.0"
-  description: >
-    Middleware entre GPT Builder e Google Drive.  
-    Autenticação via Service Account.  
-    **Sempre envie o header `x-api-key`.**
+  description: |
+    Middleware entre GPT Builder e Google Drive.
+    Autenticação via Service Account.
+    Sempre envie o header `x-api-key`.
+
 servers:
   - url: https://drive-proxy-juo9.vercel.app
+
 paths:
   /api/search:
     get:
-      summary: Buscar arquivos no Drive
+      summary: Buscar arquivos no Google Drive
+      description: Retorna lista de arquivos que correspondem ao termo pesquisado.
       parameters:
         - name: query
           in: query
@@ -22,7 +25,7 @@ paths:
           in: query
           schema:
             type: string
-          description: ID da pasta do Drive para restringir a busca.
+          description: ID da pasta para restringir a busca.
         - name: pageSize
           in: query
           schema:
@@ -32,41 +35,69 @@ paths:
       responses:
         "200":
           description: Lista de arquivos encontrados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        mimeType:
+                          type: string
+                        modifiedTime:
+                          type: string
+                        webViewLink:
+                          type: string
+
   /api/export/{id}:
     get:
-      summary: Exportar arquivo Google Docs/Sheets/Slides
+      summary: Exportar Google Docs/Sheets/Slides
+      description: Exporta um documento Google para outro formato (PDF, texto, CSV, etc).
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
+          description: ID do arquivo no Google Drive.
         - name: mime
           in: query
           schema:
             type: string
             default: application/pdf
-          description: Tipo MIME (ex. application/pdf, text/plain, text/csv).
+          description: Tipo MIME de exportação (ex: application/pdf, text/plain, text/csv).
       responses:
         "200":
           description: Conteúdo exportado em stream.
+
   /api/file/{id}:
     get:
-      summary: Download de arquivo binário (PDF, imagem etc.)
+      summary: Download de arquivo binário
+      description: Faz o download de arquivos já binários (PDFs, imagens, etc).
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
+          description: ID do arquivo no Google Drive.
       responses:
         "200":
           description: Stream do arquivo binário.
+
 components:
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: x-api-key
+
 security:
   - ApiKeyAuth: []
