@@ -9,7 +9,7 @@ info:
 
 servers:
   - url: https://drive-proxy-juo9.vercel.app
-
+    description: "Servidor principal do Drive Proxy"
 
 paths:
   /api/search:
