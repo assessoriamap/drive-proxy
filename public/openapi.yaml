@@ -8,7 +8,7 @@ info:
     Sempre envie o header `x-api-key`.
 
 servers:
-  - url: https://drive-proxy-juo9.vercel.app
+  - url: "https://drive-proxy-juo9.vercel.app"
 
 paths:
   /api/search:
